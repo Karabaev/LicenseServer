@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b758d40dff884d72a74e9740a19080ab" Name="Diagram1">
+        <EntityTypeShape EntityType="LicenseServerModel.ActivatedLicens" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LicenseServerModel.Device" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LicenseServerModel.License" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LicenseServerModel.LicenseType" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LicenseServerModel.Owner" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="LicenseServerModel.FK_ActivatedLicenses_Devices" ManuallyRouted="false" />
+        <AssociationConnector Association="LicenseServerModel.FK_ActivatedLicenses_Licenses" ManuallyRouted="false" />
+        <AssociationConnector Association="LicenseServerModel.FK_Devices_Owners" ManuallyRouted="false" />
+        <AssociationConnector Association="LicenseServerModel.FK_Licenses_LicenseTypes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

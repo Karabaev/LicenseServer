@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище LicenseServerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActivatedLicenses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenseID" Type="int" Nullable="false" />
+          <Property Name="ActivationDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Devices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HardwareID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="OwnerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Licenses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenseCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TerminationTime" Type="int" />
+          <Property Name="LicenseTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LicenseTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenseTypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="INN" Type="varchar" MaxLength="50" />
+          <Property Name="KPP" Type="varchar" MaxLength="50" />
+          <Property Name="Director" Type="varchar" MaxLength="100" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_ActivatedLicenses_Devices">
+          <End Role="Devices" Type="Self.Devices" Multiplicity="1" />
+          <End Role="ActivatedLicenses" Type="Self.ActivatedLicenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActivatedLicenses">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivatedLicenses_Licenses">
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="1" />
+          <End Role="ActivatedLicenses" Type="Self.ActivatedLicenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licenses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActivatedLicenses">
+              <PropertyRef Name="LicenseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Devices_Owners">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+          <End Role="Devices" Type="Self.Devices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Devices">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Licenses_LicenseTypes">
+          <End Role="LicenseTypes" Type="Self.LicenseTypes" Multiplicity="1" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenseTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="LicenseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище LicenseServerModelContainer">
+          <EntitySet Name="ActivatedLicenses" EntityType="Self.ActivatedLicenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Licenses" EntityType="Self.Licenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LicenseTypes" EntityType="Self.LicenseTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owners" EntityType="Self.Owners" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ActivatedLicenses_Devices" Association="Self.FK_ActivatedLicenses_Devices">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="ActivatedLicenses" EntitySet="ActivatedLicenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivatedLicenses_Licenses" Association="Self.FK_ActivatedLicenses_Licenses">
+            <End Role="Licenses" EntitySet="Licenses" />
+            <End Role="ActivatedLicenses" EntitySet="ActivatedLicenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Devices_Owners" Association="Self.FK_Devices_Owners">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="Devices" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Licenses_LicenseTypes" Association="Self.FK_Licenses_LicenseTypes">
+            <End Role="LicenseTypes" EntitySet="LicenseTypes" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LicenseServerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ActivatedLicens">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicenseID" Type="Int32" Nullable="false" />
+          <Property Name="ActivationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="DeviceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_ActivatedLicenses_Devices" FromRole="ActivatedLicenses" ToRole="Devices" />
+          <NavigationProperty Name="License" Relationship="Self.FK_ActivatedLicenses_Licenses" FromRole="ActivatedLicenses" ToRole="Licenses" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HardwareID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OwnerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActivatedLicenses" Relationship="Self.FK_ActivatedLicenses_Devices" FromRole="Devices" ToRole="ActivatedLicenses" />
+          <NavigationProperty Name="Owner" Relationship="Self.FK_Devices_Owners" FromRole="Devices" ToRole="Owners" />
+        </EntityType>
+        <EntityType Name="License">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TerminationTime" Type="Int32" />
+          <Property Name="LicenseTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActivatedLicenses" Relationship="Self.FK_ActivatedLicenses_Licenses" FromRole="Licenses" ToRole="ActivatedLicenses" />
+          <NavigationProperty Name="LicenseType" Relationship="Self.FK_Licenses_LicenseTypes" FromRole="Licenses" ToRole="LicenseTypes" />
+          <Property Name="LicenseCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LicenseType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Licenses" Relationship="Self.FK_Licenses_LicenseTypes" FromRole="LicenseTypes" ToRole="Licenses" />
+          <Property Name="LicenseTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="INN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KPP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Director" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Devices" Relationship="Self.FK_Devices_Owners" FromRole="Owners" ToRole="Devices" />
+        </EntityType>
+        <Association Name="FK_ActivatedLicenses_Devices">
+          <End Role="Devices" Type="Self.Device" Multiplicity="1" />
+          <End Role="ActivatedLicenses" Type="Self.ActivatedLicens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActivatedLicenses">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivatedLicenses_Licenses">
+          <End Role="Licenses" Type="Self.License" Multiplicity="1" />
+          <End Role="ActivatedLicenses" Type="Self.ActivatedLicens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licenses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActivatedLicenses">
+              <PropertyRef Name="LicenseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Devices_Owners">
+          <End Role="Owners" Type="Self.Owner" Multiplicity="1" />
+          <End Role="Devices" Type="Self.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Devices">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Licenses_LicenseTypes">
+          <End Role="LicenseTypes" Type="Self.LicenseType" Multiplicity="1" />
+          <End Role="Licenses" Type="Self.License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenseTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="LicenseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LicenseServerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActivatedLicenses" EntityType="Self.ActivatedLicens" />
+          <EntitySet Name="Devices" EntityType="Self.Device" />
+          <EntitySet Name="Licenses" EntityType="Self.License" />
+          <EntitySet Name="LicenseTypes" EntityType="Self.LicenseType" />
+          <EntitySet Name="Owners" EntityType="Self.Owner" />
+          <AssociationSet Name="FK_ActivatedLicenses_Devices" Association="Self.FK_ActivatedLicenses_Devices">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="ActivatedLicenses" EntitySet="ActivatedLicenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivatedLicenses_Licenses" Association="Self.FK_ActivatedLicenses_Licenses">
+            <End Role="Licenses" EntitySet="Licenses" />
+            <End Role="ActivatedLicenses" EntitySet="ActivatedLicenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Devices_Owners" Association="Self.FK_Devices_Owners">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="Devices" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Licenses_LicenseTypes" Association="Self.FK_Licenses_LicenseTypes">
+            <End Role="LicenseTypes" EntitySet="LicenseTypes" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище LicenseServerModelContainer" CdmEntityContainer="LicenseServerEntities">
+          <EntitySetMapping Name="ActivatedLicenses">
+            <EntityTypeMapping TypeName="LicenseServerModel.ActivatedLicens">
+              <MappingFragment StoreEntitySet="ActivatedLicenses">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LicenseID" ColumnName="LicenseID" />
+                <ScalarProperty Name="ActivationDate" ColumnName="ActivationDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Devices">
+            <EntityTypeMapping TypeName="LicenseServerModel.Device">
+              <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HardwareID" ColumnName="HardwareID" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Licenses">
+            <EntityTypeMapping TypeName="LicenseServerModel.License">
+              <MappingFragment StoreEntitySet="Licenses">
+                <ScalarProperty Name="LicenseCode" ColumnName="LicenseCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TerminationTime" ColumnName="TerminationTime" />
+                <ScalarProperty Name="LicenseTypeID" ColumnName="LicenseTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LicenseTypes">
+            <EntityTypeMapping TypeName="LicenseServerModel.LicenseType">
+              <MappingFragment StoreEntitySet="LicenseTypes">
+                <ScalarProperty Name="LicenseTypeName" ColumnName="LicenseTypeName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owners">
+            <EntityTypeMapping TypeName="LicenseServerModel.Owner">
+              <MappingFragment StoreEntitySet="Owners">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="KPP" ColumnName="KPP" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище LicenseServerModelContainer" CdmEntityContainer="LicenseServerEntities">
+    <EntitySetMapping Name="ActivatedLicenses">
+      <EntityTypeMapping TypeName="LicenseServerModel.ActivatedLicens">
+        <MappingFragment StoreEntitySet="ActivatedLicenses">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LicenseID" ColumnName="LicenseID" />
+          <ScalarProperty Name="ActivationDate" ColumnName="ActivationDate" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+          <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Devices">
+      <EntityTypeMapping TypeName="LicenseServerModel.Device">
+        <MappingFragment StoreEntitySet="Devices">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HardwareID" ColumnName="HardwareID" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Licenses">
+      <EntityTypeMapping TypeName="LicenseServerModel.License">
+        <MappingFragment StoreEntitySet="Licenses">
+          <ScalarProperty Name="LicenseCode" ColumnName="LicenseCode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TerminationTime" ColumnName="TerminationTime" />
+          <ScalarProperty Name="LicenseTypeID" ColumnName="LicenseTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LicenseTypes">
+      <EntityTypeMapping TypeName="LicenseServerModel.LicenseType">
+        <MappingFragment StoreEntitySet="LicenseTypes">
+          <ScalarProperty Name="LicenseTypeName" ColumnName="LicenseTypeName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Owners">
+      <EntityTypeMapping TypeName="LicenseServerModel.Owner">
+        <MappingFragment StoreEntitySet="Owners">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="INN" ColumnName="INN" />
+          <ScalarProperty Name="KPP" ColumnName="KPP" />
+          <ScalarProperty Name="Director" ColumnName="Director" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

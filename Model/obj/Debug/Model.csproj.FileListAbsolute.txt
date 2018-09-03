@@ -1,0 +1,13 @@
+C:\Проекты\LicenseServer\Model\bin\Debug\Model.dll.config
+C:\Проекты\LicenseServer\Model\bin\Debug\Model.dll
+C:\Проекты\LicenseServer\Model\bin\Debug\Model.pdb
+C:\Проекты\LicenseServer\Model\bin\Debug\EntityFramework.dll
+C:\Проекты\LicenseServer\Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Проекты\LicenseServer\Model\bin\Debug\EntityFramework.xml
+C:\Проекты\LicenseServer\Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Проекты\LicenseServer\Model\bin\Debug\ru\EntityFramework.resources.dll
+C:\Проекты\LicenseServer\Model\obj\Debug\Model.csprojAssemblyReference.cache
+C:\Проекты\LicenseServer\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+C:\Проекты\LicenseServer\Model\obj\Debug\Model.csproj.CopyComplete
+C:\Проекты\LicenseServer\Model\obj\Debug\Model.dll
+C:\Проекты\LicenseServer\Model\obj\Debug\Model.pdb
